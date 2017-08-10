@@ -81,8 +81,9 @@ def get_image():
     return link
 if __name__ == '__main__':
 
-    # print get_image()
-    # exit()
+    import random
+    num = str(int(random.uniform(1,500000)))
+    url = "https://wallpapers.wallhaven.cc/wallpapers/full/wallhaven-"+num+".jpg"
 
     files = getTemplate()
     content = getcontent()[0]
@@ -93,6 +94,8 @@ if __name__ == '__main__':
     files = files.replace("<title>",date)
     files = files.replace("<content1>",content)
     files = files.replace("<content2>",translation)
+    files = files.replace("<url1>",url)
+    files = files.replace("<url2>",url)
     # url = get_image()
     # files = files.replace("<url1>",url)
     # files = files.replace("<url2>",url)
@@ -107,6 +110,7 @@ if __name__ == '__main__':
     terminal = "mv "+ date +"-English-exercise-"+ delta +"day.md ../hexo_test/source/_posts"
     os.system(terminal)
 
+    '''
     mv = "cd ../hexo_test"
     pwd = "pwd"
     generate = "hexo generate"
@@ -132,3 +136,4 @@ if __name__ == '__main__':
 		print "hexo deploy error"
 
     exit()
+    '''

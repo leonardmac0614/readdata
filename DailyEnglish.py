@@ -112,8 +112,7 @@ if __name__ == '__main__':
 
     terminal = "mv "+ date +"-English-exercise-"+ delta +"day.md ../hexo_test/source/_posts"
     os.system(terminal)
-
-    os.chdir("/Users/shuailong/Desktop/my_test/blog/hexo_test")
+    os.chdir("/root/hexo_test")
     generate = "hexo generate"
     deploy = "hexo deploy"
 

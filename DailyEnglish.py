@@ -13,7 +13,10 @@ from bs4 import BeautifulSoup
 import datetime
 import os
 import time
+import commands
+import traceback
 
+# log.startLogging(open("/Users/shuailong/Desktop/my_test/blog/readdata/deploy.log",'w'))
 
 def getTemplate():
    return '''---
@@ -110,18 +113,10 @@ if __name__ == '__main__':
     terminal = "mv "+ date +"-English-exercise-"+ delta +"day.md ../hexo_test/source/_posts"
     os.system(terminal)
 
-    '''
-    mv = "cd ../hexo_test"
-    pwd = "pwd"
+    os.chdir("/Users/shuailong/Desktop/my_test/blog/hexo_test")
     generate = "hexo generate"
     deploy = "hexo deploy"
-    try:
-		os.system(mv)
-    except:
-		print "mv error"
-    print "mv"
-    time.sleep(5)
-    print os.system(pwd)
+
     try:
 		os.system(generate)
     except:
@@ -134,6 +129,3 @@ if __name__ == '__main__':
 		print "well done!"
     except:
 		print "hexo deploy error"
-
-    exit()
-    '''

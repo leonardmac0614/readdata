@@ -15,8 +15,17 @@ import os
 import time
 import commands
 import traceback
+import random
 
 # log.startLogging(open("/Users/shuailong/Desktop/my_test/blog/readdata/deploy.log",'w'))
+from qcloud_image import Client, CIFile
+from qcloud_image import CIUrl, CIFile, CIBuffer, CIUrls, CIFiles, CIBuffers
+
+appid = '1254186078'
+secret_id = 'AKIDxnX6Xq9NM8h6LSRahcLuIXebfYFkh82l'
+secret_key = 'hDXe6SddT7ZpyvgFcqyudAVhjZCdsHYd'
+bucket = 'test'
+
 
 def getTemplate():
    return '''---
@@ -82,11 +91,35 @@ def get_image():
 		pass
 
     return link
+
+def check_image():
+    client = Client(appid, secret_id, secret_key, bucket)
+    client.use_http()
+    client.set_timeout(30)
+
+    status = True
+    while status:
+
+        num = str(int(random.uniform(1,500000)))
+        url = "https://wallpapers.wallhaven.cc/wallpapers/full/wallhaven-"+num+".jpg"
+        result =  client.porn_detect(CIUrls([url]))["result_list"][0]
+        if result["message"] == "success":
+            if result["data"]["porn_score"] < 50:
+                status = False
+
+
+    return  url, result
+    # print client.tag_detect(CIFile('../readdata/image/test.png'))
+
 if __name__ == '__main__':
 
+    '''
     import random
     num = str(int(random.uniform(1,500000)))
     url = "https://wallpapers.wallhaven.cc/wallpapers/full/wallhaven-"+num+".jpg"
+    '''
+    url , result = check_image()
+    print "可信度：",result["data"]["confidence"],"性感值：",result["data"]["hot_score"],"色情值：",result["data"]["porn_score"]
 
     files = getTemplate()
     content = getcontent()[0]
